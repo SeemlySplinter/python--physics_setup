@@ -29,12 +29,16 @@ def main():
         print_version=True,
         dependencies=['numpy', 'matplotlib'],
     )
-    #* \begin{Workspace} 
+    """ Begin Workspace """ 
     
     
     
-    #* \end{Workspace} 
-    rt.print_results()
+    #* print results:
+    if True:
+        print()
+        print(--Results--)
+        print()
+    """ End WorkSpace"""
     log.housekeeping_final(
         filename=filename_main, 
         location=reldirname_main,
