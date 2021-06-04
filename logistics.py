@@ -3,7 +3,7 @@ import matplotlib as mpl
 import time
 import sys
 import warnings
-from typing import List
+from typing import List, Union
 from functools import reduce
 
 
@@ -12,16 +12,22 @@ if True:
     start_time = None 
 
 
-def print_version_info(dependencies:List[str], ):
+def print_version_info(dependencies:List[str], py_full:str=None):
     """ "dependencies" should contain additional dependencies 
     (beyond 'python') required to run the current script.  
-    e.g. ['numpy', 'matplotlib'] """
+    e.g. ['numpy', 'matplotlib'];
+    "py_full" should be any str (e.g. 'full'), which will 
+    have the python version print in it's full form--this 
+    defaults to False, where the python version will be of the
+    form '#.x.x' """
     
     head = 'versions:'
     prefix = ' ' * (len(head)+1)
     py_vers_template = '3.x.x'
     py_vers_length = len(py_vers_template)
-    
+    py_vers = sys.version \
+        if py_full else sys.version[:py_vers_length]
+
     print(head + ' python--' + sys.version[:py_vers_length])
     if 'numpy' in dependencies:
         print(prefix + 'numpy--' + np.__version__)
@@ -113,7 +119,7 @@ def housekeeping_initial(
     ignore_warnings:bool=False, 
     location:str=None,
     filename:str=None,
-    print_version:bool=False, 
+    print_version:Union[bool, List]=False,
     dependencies:List[str]=None,
 ):
     """ "ignore_warnings" is used to quiet all warnings from the
@@ -121,10 +127,16 @@ def housekeeping_initial(
     "location" should be the relative path of the current file 
     (without basename). 
     "filename" should be the name of the current file. 
-    "print_version" is used to send version info to stdout; if this 
-    option is True, then one must provide strings of required 
-    dependencies in "dependency_list", e.g. ['numpy', 'matplotlib'] 
-    """
+    "print_version" is used to send version info to stdout; 
+    if this option is True, then one must provide strings of 
+    required dependencies in "dependency_list", e.g. ['numpy', 
+    'matplotlib'] 
+
+    One can also set "print_version" : [bool, str], where the  
+    the bool is the normal print_version option, and the 
+    str (e.g. 'full') indicates whether the python version 
+    should be printed in full (defaults to None if "print_version" 
+    is given as a single bool)"""
     global start_time
     
     line = '=' * 40
@@ -135,7 +147,11 @@ def housekeeping_initial(
     
     print()
     if print_version:
-        print_version_info(dependencies=dependencies)
+        py_full = print_version[1] \
+            if type(print_version) == list else False
+        print_version_info(
+            dependencies=dependencies, py_full=py_full
+        )
     print_file_info(filename=filename, location=location)
     print('--NEW RUN--')
     print(line)

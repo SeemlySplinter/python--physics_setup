@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import logistics as log
+import logistics as lgs
 import time
 from typing import List, Union
 
@@ -14,7 +14,7 @@ def replica_job():
     # print(msg)
     for i in range(stop):
         time.sleep(0.1)
-        log.print_loop_progress(i, stop, msg=msg)
+        lgs.print_loop_progress(i, stop, msg=msg)
 
 
 def build_plot(

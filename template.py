@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import logistics as log
+import logistics as lgs
 import os
 # import config as cfg
-# import routines as rt
+# import routines as rts
 
 
 #* File Specifications:
@@ -16,20 +16,48 @@ if True:
     )
 
 
-#* Assign Constants
+#* Assign Constants:
 if True:
     pass
 
 
-def main():
-    log.housekeeping_initial(
-        ignore_warnings=False, 
+#*Body:
+
+
+def begin():
+    """ initial terminal housekeeping 
+    
+    --Version info (2020-06-04)--
+    versions: python--3.8.5 
+                (default, Sep  3 2020, 21:29:08) 
+                [MSC v.1916 64 bit (AMD64)]; 
+              numpy--1.19.2; 
+              matplotlib--3.3.2;
+    """
+
+    lgs.housekeeping_initial(
+        ignore_warnings=True, 
         filename=filename_main, 
         location=reldirname_main,
-        print_version=True,
-        dependencies=['numpy', 'matplotlib'],
+        print_version= [True, None], 
+        dependencies=['numpy',  'matplotlib']
     )
-    """ Begin Workspace """ 
+
+
+def end():
+    """ final terminal housekeeping """
+
+    lgs.housekeeping_final(
+        filename=filename_main, 
+        location=reldirname_main,
+        print_timing=True,
+    )
+
+
+
+def main():
+    begin()
+    """ --Top of Stack-- """
     
     
     
@@ -38,12 +66,8 @@ def main():
         print()
         print('--Results--')
         print()
-    """ End WorkSpace"""
-    log.housekeeping_final(
-        filename=filename_main, 
-        location=reldirname_main,
-        print_timing=True,
-    )
+    """ --Bottom of Stack-- """
+    end()
     plt.show()
 
 
