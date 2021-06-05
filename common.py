@@ -91,7 +91,7 @@ def build_plot(
     
     # labels:
     plt.xlabel(x_label)
-    plt.xlabel(y_label)
+    plt.ylabel(y_label)
     plt.title(plot_title)
 
     # options
