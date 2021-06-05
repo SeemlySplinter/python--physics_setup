@@ -21,8 +21,8 @@ def build_plot(
     fig_label :       str                               ,
     x_arrs :          List[List[float]]                 ,
     y_arrs :          List[List[float]]                 ,
-    plot_labels :     List[str]                         ,
 
+    plot_labels :     List[str]             = None      ,
     fig_loc :         List[float]           = [600, 250],
     fig_size :        List[float]           = [640, 520],
     x_label :         str                   = ''        ,
@@ -35,7 +35,7 @@ def build_plot(
     axes :            Union[bool, List]     = False     ,
     grid:             Union[bool, List]     = False     , 
     y_lim :           List[float]           = None      ,
-    x_lim :           List[float]           = None      ,
+    x_lim :           List[float]           = None      ,   
 ):
     """ 
     Builds a plot using matplotlib.pyplot;
@@ -46,10 +46,10 @@ def build_plot(
         fig_label :       str                     ,
         x_arrs :          List[List[float]]       ,
         y_arrs :          List[List[float]]       ,
-        plot_labels :     List[str]               ,
 
         (--optional arguments--)
         
+        plot_labels :     List[str]               ,
         fig_loc :         [float, float]          ,
         fig_size :        [float, float]          ,
         x_label :         str                     ,
@@ -77,12 +77,13 @@ def build_plot(
 
     # Main plot call:
     for i in range(len(y_arrs)):
+        label = plot_labels[i] if plot_labels else None
         linestyle = linestyles[i] if linestyles else '-'
         color = plot_colors[i] if plot_colors else f'C{i}'
         marker = plot_markers[i] if plot_markers else None
         plt.plot(
             x_arrs[i], y_arrs[i], 
-            label=plot_labels[i],
+            label=label,
             linestyle=linestyle,
             color=color, 
             marker=marker
@@ -95,16 +96,24 @@ def build_plot(
 
     # options
     if legend:
-        legend_loc = legend[1] if type(legend) == list else 'best'
+        legend_loc = legend[1] \
+            if type(legend) == list else 'best'
         plt.legend(loc=legend_loc)
     if grid:
-        opacity = grid[1] if type(grid) == list else 0.3
+        opacity = grid[1] \
+            if type(grid) == list else 0.3
         plt.grid(alpha=opacity)
     if axes:
-        axes_linestyle = axes[1] if type(axes) == list else '--'
-        axes_color = axes[2] if type(axes) == list else 'k'
-        plt.axhline(0, linestyle=axes_linestyle, color=axes_color)
-        plt.axvline(0, linestyle=axes_linestyle, color=axes_color)
+        axes_linestyle = axes[1] \
+            if type(axes) == list else '--'
+        axes_color = axes[2] \
+            if type(axes) == list else 'k'
+        plt.axhline(
+            0, linestyle=axes_linestyle, color=axes_color
+        )
+        plt.axvline(
+            0, linestyle=axes_linestyle, color=axes_color
+        )
     if x_lim:
         plt.xlim(x_lim[0], x_lim[1])
     if y_lim:
