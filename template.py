@@ -1,18 +1,19 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import logistics as lgs
+# import numpy as np
+# import matplotlib.pyplot as plt
+import logistics
 import os
-# import config as cfg
-# import routines as rts
+# import config
+# import routines
+# import common
 
 
 #* File Specifications:
 if True:
     filename_main = os.path.basename(__file__)
-    dirname_main = os.path.dirname(__file__)
-    relpath_main = os.path.relpath(__file__) 
-    reldirname_main = os.path.join(
-        '~', relpath_main[:-len(filename_main)]
+    home = os.path.expanduser('~')
+    path_home2main = os.path.relpath(__file__, start=home)
+    location_main = os.path.join(
+        '~', path_home2main[:-len(filename_main)]
     )
 
 
@@ -21,38 +22,40 @@ if True:
     pass
 
 
-#*Body:
+#* Body:
 
 
 def begin():
-    """ initial terminal housekeeping 
-    
-    --Version info (2020-06-04)--
-    versions: python--3.8.5 
-                (default, Sep  3 2020, 21:29:08) 
-                [MSC v.1916 64 bit (AMD64)]; 
-              numpy--1.19.2; 
-              matplotlib--3.3.2;
+    """ 
+        Initial terminal housekeeping. 
+        
+        --Version info (2020-06-23)--
+        * versions: 
+                * python--3.8.5 
+                (default, Sep  3 2020, 21:29:08) [MSC v.1916 64 bit (AMD64)];
+                * numpy--1.19.2;
+                * matplotlib--3.3.2;
     """
 
-    lgs.housekeeping_initial(
+    logistics.housekeeping_initial(
         ignore_warnings=True, 
         filename=filename_main, 
-        location=reldirname_main,
-        print_version= [True, None], 
+        location=location_main,
+        print_version= [True, 'full'], 
         dependencies=['numpy',  'matplotlib']
     )
 
 
 def end():
-    """ final terminal housekeeping """
+    """ 
+        Final terminal housekeeping.
+    """
 
-    lgs.housekeeping_final(
+    logistics.housekeeping_final(
         filename=filename_main, 
-        location=reldirname_main,
+        location=location_main,
         print_timing=True,
     )
-
 
 
 def main():
@@ -68,7 +71,7 @@ def main():
         print()
     """ --Bottom of Stack-- """
     end()
-    plt.show()
+    # plt.show()
 
 
 if __name__ == '__main__':
