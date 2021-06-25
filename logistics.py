@@ -195,8 +195,7 @@ def housekeeping_initial(
     
     print()
     if print_version:
-        py_full = print_version[1] \
-            if type(print_version) == list else False
+        py_full = print_version[1] if type(print_version) == list else False
         print_version_info(
             dependencies=dependencies, py_full=py_full
         )
