@@ -23,7 +23,7 @@ def print_version_info(dependencies:List[str], py_full:bool=False):
             ['numpy', 'matplotlib'].
         * py_full : bool, optional //
             True corresponds to printing the python version 
-            in its full form; None corresponds to printing 
+            in its full form; False corresponds to printing 
             in the form: #.x.x,  
                 * by default False.
     """    
