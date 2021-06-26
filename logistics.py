@@ -125,7 +125,7 @@ def print_time_required(
     time_req = time.perf_counter() - init_time
     time_str = seconds_to_timestring(time_req, full_str=full_str)
     print(prefix + f'time required: {time_str:s}')
-
+    
 
 def print_total_time(start_time:float, full_str:bool=False):
     """
@@ -179,7 +179,8 @@ def housekeeping_initial(
             as a single bool),  
                 * by default False. 
         * dependencies : List[str], optional // 
-            [description], 
+            List of required dependencies, 
+            e.g. ['numpy', 'matplotlib'], 
                 * only required if (print_version == True) 
                 OR (print_version[0] == True), 
                 * by default None. 
@@ -189,21 +190,19 @@ def housekeeping_initial(
     
     global start_time
     start_time = time.perf_counter()
-
+    
     if ignore_warnings:
         warnings.filterwarnings('ignore')
     
     print()
     if print_version:
         py_full = print_version[1] if type(print_version) == list else False
-        print_version_info(
-            dependencies=dependencies, py_full=py_full
-        )
+        print_version_info(dependencies=dependencies, py_full=py_full)
     print_file_info(filename=filename, location=location)
     print('--NEW RUN--')
     print(line)
     print()
-    
+
 
 def housekeeping_final(
     location:str=None,
