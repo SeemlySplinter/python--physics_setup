@@ -41,7 +41,7 @@ def begin():
         ignore_warnings=True, 
         filename=filename_main, 
         location=location_main,
-        print_version= [True, 'full'], 
+        print_version= [False, False], 
         dependencies=['numpy',  'matplotlib']
     )
 
