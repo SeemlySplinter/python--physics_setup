@@ -10,7 +10,7 @@ from functools import reduce
 if True:
     # suppress reportUnboundVariable:
     start_time = None 
-
+    
 
 def print_version_info(dependencies:List[str], py_full:bool=False):
     """
@@ -195,9 +195,11 @@ def housekeeping_initial(
         warnings.filterwarnings('ignore')
     
     print()
-    if print_version:
-        py_full = print_version[1] if type(print_version) == list else False
+    
+    py_full = print_version[1] if type(print_version) == list else False
+    if print_version == True or print_version[0] == True:
         print_version_info(dependencies=dependencies, py_full=py_full)
+    
     print_file_info(filename=filename, location=location)
     print('--NEW RUN--')
     print(line)
@@ -226,7 +228,7 @@ def housekeeping_final(
     """    
 
     line = '=' * 40
-
+    
     print()
     print(line)
     print_file_info(filename=filename, location=location) 
@@ -235,7 +237,7 @@ def housekeeping_final(
             start_time=start_time, full_str=False
         )
     print('--DONE--')
-    print('\n')
+    print()
     
 
 def print_loop_progress(
